@@ -12,6 +12,7 @@ const config = defineConfig({
       },
     },
     plugins: [externalizeDepsPlugin(), tsconfigPaths({ configNames: ['tsconfig.node.json'] })],
+    envDir: __dirname,
   },
   preload: {
     root: resolve(__dirname, 'src/app/preload'),

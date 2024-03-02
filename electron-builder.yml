@@ -15,7 +15,7 @@ asarUnpack:
 win:
   executableName: treeride
 nsis:
-  artifactName: ${productName}-${version}-setup.${ext}
+  artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
@@ -23,7 +23,7 @@ mac:
   entitlementsInherit: build/entitlements.mac.plist
   notarize: false
 dmg:
-  artifactName: ${productName}-${version}.${ext}
+  artifactName: ${name}-${version}.${ext}
 linux:
   target:
     - AppImage

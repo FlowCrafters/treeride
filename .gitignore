@@ -1,0 +1,15 @@
+# Dependency directories
+/node_modules
+
+# Output directories
+/dist
+/out
+
+# Misc
+.DS_Store
+
+# Logs
+*.log*
+
+# Tests
+/coverage

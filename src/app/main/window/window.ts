@@ -5,10 +5,18 @@ import icon from '@resources/icon.png?asset'
 
 function makeWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
     title: 'TreeRide',
-    show: false,
+    frame: false,
+    width: 800,
+    height: 500,
+    skipTaskbar: true,
+    resizable: false,
+    maximizable: false,
+    minimizable: false,
+    closable: false,
+    roundedCorners: true,
+    backgroundMaterial: 'acrylic',
+    vibrancy: 'window',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

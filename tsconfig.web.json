@@ -1,40 +1,34 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
   "include": [
-    "src"
-  ],
-  "exclude": [
-    "src/app/main",
+    "src/renderer/env.d.ts",
+    "src/renderer/**/*",
+    "src/renderer/**/*.tsx",
+    "src/preload/*.d.ts",
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "paths": {
-      "@main/*": [
-        "src/app/main/*"
-      ],
-      "@preload/*": [
-        "src/app/preload/*"
-      ],
-      "@renderer/*": [
-        "src/app/renderer/*"
-      ],
-      "@entities/*": [
-        "src/entities/*"
-      ],
-      "@features/*": [
-        "src/features/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@shared/*": [
-        "src/shared/*"
-      ],
-      "@widgets/*": [
-        "src/widgets/*"
-      ],
-    }
+      "paths": {
+        "@app/*": [
+          "src/renderer/app/*"
+        ],
+        "@entities/*": [
+          "src/renderer/entities/*"
+        ],
+        "@features/*": [
+          "src/renderer/features/*"
+        ],
+        "@pages/*": [
+          "src/renderer/pages/*"
+        ],
+        "@shared/*": [
+          "src/renderer/shared/*"
+        ],
+        "@widgets/*": [
+          "src/renderer/widgets/*"
+        ],
+      }
   }
 }

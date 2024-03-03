@@ -1,15 +1,6 @@
 import antfu from '@antfu/eslint-config'
-import unusedImports from 'eslint-plugin-unused-imports'
 
-export default antfu({
-  ignores: [
-    'node_modules',
-    'dist',
-    'out',
-  ],
-  plugins: {
-    'unused-imports': unusedImports,
-  },
+const baseConfig = {
   react: {
     overrides: {
       'react/destructuring-assignment': ['error', 'always', { ignoreClassFields: true }],
@@ -27,6 +18,15 @@ export default antfu({
       ],
     },
   },
+  ignores: [
+    'node_modules',
+    'dist',
+    'out',
+    'src/renderer/shared/kit/ui',
+  ],
+}
+
+const configOverrides = {
   rules: {
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
@@ -61,4 +61,8 @@ export default antfu({
       },
     ],
   },
-})
+}
+
+const config = antfu(baseConfig, configOverrides)
+
+export default config

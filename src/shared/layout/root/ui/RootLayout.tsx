@@ -1,13 +1,21 @@
-import type { FC, PropsWithChildren } from 'react'
+import type { FC, ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 
-type RootLayoutProps = PropsWithChildren
+interface RootLayoutProps {
+  footer: ReactNode
+}
 
-const RootLayout: FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: FC<RootLayoutProps> = ({ footer }) => {
   return (
     <div
-      className="h-full px-2 py-1"
+      className="h-full flex flex-col"
     >
-      {children}
+      <div
+        className="flex flex-col flex-1"
+      >
+        <Outlet />
+      </div>
+      {footer}
     </div>
   )
 }

@@ -7,6 +7,5 @@ html, body, #root {
 }
 
 body {
-  -webkit-app-region: drag;
-  overflow: hidden;
+  user-select: none;
 }

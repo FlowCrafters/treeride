@@ -5,6 +5,7 @@ import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { makeWindow } from './window/window'
 import { addWindowHandlers } from './window/handlers'
 import { makeTray } from './window/tray'
+import { registerShortcuts, unregisterShortcuts } from './shortcuts'
 
 function createWindow(): void {
   const mainWindow = makeWindow()
@@ -18,6 +19,8 @@ app.whenReady().then(() => {
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
+    registerShortcuts(window)
+
     tray = makeTray(window, app)
   })
 
@@ -30,6 +33,10 @@ app.whenReady().then(() => {
 
   app.on('before-quit', () => {
     tray?.destroy()
+  })
+
+  app.on('will-quit', () => {
+    unregisterShortcuts()
   })
 })
 

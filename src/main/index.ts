@@ -1,9 +1,9 @@
 import { join } from 'node:path'
 import process from 'node:process'
-import { BrowserWindow, Menu, Tray, app, ipcMain, shell } from 'electron'
+import { BrowserWindow, Menu, Tray, app, shell } from 'electron'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
-import { checkEnvVar } from '../utils/env'
+import icon from '@resources/icon.png?asset'
+import { setIPCHandlers } from './ipcHandlers'
 
 function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
@@ -33,7 +33,7 @@ function createWindow(): BrowserWindow {
   })
 
   mainWindow.on('blur', () => {
-    if (!checkEnvVar(import.meta.env.MAIN_VITE_NO_MAIN_WINDOW_BLUR_HIDE, 'boolean', true))
+    if (import.meta.env.MAIN_VITE_NO_MAIN_WINDOW_BLUR_HIDE !== 'true')
       mainWindow.hide()
   })
 
@@ -77,21 +77,7 @@ app.whenReady().then(() => {
   tray.setToolTip('TreeRide')
   tray.setContextMenu(contextMenu)
 
-  ipcMain.on('exit-app', () => {
-    app.exit()
-  })
-
-  ipcMain.on('wide', (_, wide: boolean) => {
-    const mainWindow = BrowserWindow.getAllWindows()[0]
-    mainWindow.setResizable(true)
-    if (wide)
-      mainWindow.setSize(1200, 800, false)
-    else
-      mainWindow.setSize(800, 500, false)
-
-    mainWindow.setResizable(false)
-    mainWindow.center()
-  })
+  setIPCHandlers(app)
 })
 
 app.on('window-all-closed', () => {

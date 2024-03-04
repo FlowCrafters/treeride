@@ -5,7 +5,7 @@ type PageWrapperProps = PropsWithChildren
 const PageWrapper: FC<PageWrapperProps> = ({ children }) => {
   return (
     <div
-      className="flex flex-col flex-1 px-2 py-1"
+      className="flex flex-col flex-1"
     >
       {children}
     </div>

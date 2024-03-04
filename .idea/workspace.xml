@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="35835f91-edd0-448a-997b-273ee3fd643d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/ipcHandlers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/modules/settings/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/modules/settings/map.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/modules/settings/settings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/preload/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/app/styles/themes/treeride.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/app/styles/themes/zink.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/entities/settings/api/api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/entities/settings/hooks/useSettings.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/entities/settings/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/pages/LoaderPage/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/pages/SettingsPage/SettingsAppearancePage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/pages/SettingsPage/SettingsHotkeysPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/pages/SettingsPage/SettingsSystemPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/shared/kit/ui/spinner.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/shared/layout/settings/ui/SettingsBlock.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/renderer/shared/layout/settings/ui/SettingsLayout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/ipc/handlers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/ipc/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/modules/settings/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/modules/settings/schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/modules/themes/themes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/as.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preload/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/preload/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preload/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/preload/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/app/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/app/router/router.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/app/router/router.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/app/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/app/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/entities/.gitkeep" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/app/providers/QueryProvider/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/features/settings/ui/SettingsDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/features/settings/ui/SettingsDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/pages/SettingsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/pages/SettingsPage/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/PageWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/PageWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/WidePane.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/shared/layout/root/ui/WidePane.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/env.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.web.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.web.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2dCw1GrSvzg0xn5XTKxs6QXa4i5" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;9-feat-add-settings-control&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;21.6.2&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.11.24&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Projects/bbb&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/ow/AppData/Local/fnm_multishells/18228_1708278155745/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;F:\\Projects\\treeride\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35835f91-edd0-448a-997b-273ee3fd643d" name="Changes" comment="" />
+      <created>1709525152186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709525152186</updated>
+      <workItem from="1709525154307" duration="1163000" />
+      <workItem from="1709527621553" duration="40000" />
+      <workItem from="1709527672036" duration="26000" />
+      <workItem from="1709527726313" duration="416000" />
+      <workItem from="1709528332681" duration="141000" />
+      <workItem from="1709528486063" duration="136000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/preload/index.d.ts" />
+      </list>
+    </option>
+  </component>
+</project>

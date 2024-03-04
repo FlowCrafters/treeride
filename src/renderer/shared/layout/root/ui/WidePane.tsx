@@ -19,7 +19,7 @@ const WidePane: FC<WidePaneProps> = ({ title, children }) => {
   }, [])
 
   const handleGoBack = () => {
-    navigate(-1)
+    navigate('/main')
   }
 
   return (
@@ -43,7 +43,7 @@ const WidePane: FC<WidePaneProps> = ({ title, children }) => {
         </div>
       </div>
       <div
-        className="px-3 py-1"
+        className="px-3 flex-1"
       >
         {children}
       </div>

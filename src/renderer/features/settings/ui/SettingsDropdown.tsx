@@ -45,7 +45,10 @@ const SettingsDropdown: FC = () => {
           <SettingsIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent
+        align="start"
+        sideOffset={16}
+      >
         <DropdownMenuItem
           onClick={handleGoSettings}
         >

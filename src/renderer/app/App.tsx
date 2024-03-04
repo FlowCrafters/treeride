@@ -1,15 +1,16 @@
 import type { FC } from 'react'
 import { ThemeProvider } from './providers/ThemeProvider'
+import { QueryProvider } from './providers/QueryProvider'
 import { RouterProvider } from './router/RouterProvider'
 
 const App: FC = () => {
   return (
-    <ThemeProvider
-      defaultTheme="system"
-      storageKey="theme"
-    >
-      <RouterProvider />
-    </ThemeProvider>
+    <QueryProvider>
+
+      <ThemeProvider>
+        <RouterProvider />
+      </ThemeProvider>
+    </QueryProvider>
   )
 }
 

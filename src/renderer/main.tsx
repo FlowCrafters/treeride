@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from '@app/App'
+import '@app/styles/themes/treeride.css'
 import '@app/styles/globals.css'
 import '@app/styles/window.css'
 

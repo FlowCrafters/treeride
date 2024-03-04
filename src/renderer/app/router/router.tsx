@@ -7,6 +7,10 @@ import { LabPage } from '@pages/LabPage'
 import { Footer } from '@shared/layout/root/ui/Footer'
 import { SettingsDropdown } from '@features/settings/ui/SettingsDropdown'
 import { HelloPage } from '@pages/HelloPage'
+import { LoaderPage } from '@pages/LoaderPage'
+import { SettingsAppearancePage } from '@pages/SettingsPage/SettingsAppearancePage'
+import { SettingsHotkeysPage } from '@pages/SettingsPage/SettingsHotkeysPage'
+import { SettingsSystemPage } from '@pages/SettingsPage/SettingsSystemPage'
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
   createRoutesFromElements(
@@ -26,11 +30,15 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
         index
         element={(
           <Navigate
-            to="main"
+            to="loader"
           />
         )}
       >
       </Route>
+      <Route
+        element={<LoaderPage />}
+        path="loader"
+      />
       <Route
         element={<MainPage />}
         path="main"
@@ -42,7 +50,29 @@ const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter(
       <Route
         element={<SettingsPage />}
         path="settings"
-      />
+      >
+        <Route
+          index
+          element={(
+            <Navigate
+              to="appearance"
+            />
+          )}
+        >
+        </Route>
+        <Route
+          element={<SettingsAppearancePage />}
+          path="appearance"
+        />
+        <Route
+          element={<SettingsHotkeysPage />}
+          path="hotkeys"
+        />
+        <Route
+          element={<SettingsSystemPage />}
+          path="system"
+        />
+      </Route>
       <Route
         element={<ExtensionPage />}
         path="extension"

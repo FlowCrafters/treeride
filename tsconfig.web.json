@@ -5,30 +5,34 @@
     "src/renderer/**/*",
     "src/renderer/**/*.tsx",
     "src/preload/*.d.ts",
+    "src/types/**/*"
   ],
   "compilerOptions": {
     "composite": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-      "paths": {
-        "@app/*": [
-          "src/renderer/app/*"
-        ],
-        "@entities/*": [
-          "src/renderer/entities/*"
-        ],
-        "@features/*": [
-          "src/renderer/features/*"
-        ],
-        "@pages/*": [
-          "src/renderer/pages/*"
-        ],
-        "@shared/*": [
-          "src/renderer/shared/*"
-        ],
-        "@widgets/*": [
-          "src/renderer/widgets/*"
-        ],
-      }
+    "paths": {
+      "@app/*": [
+        "src/renderer/app/*"
+      ],
+      "@entities/*": [
+        "src/renderer/entities/*"
+      ],
+      "@features/*": [
+        "src/renderer/features/*"
+      ],
+      "@pages/*": [
+        "src/renderer/pages/*"
+      ],
+      "@shared/*": [
+        "src/renderer/shared/*"
+      ],
+      "@widgets/*": [
+        "src/renderer/widgets/*"
+      ],
+      "@rootTypes/*": [
+        "src/types/*"
+      ],
+    }
   }
 }

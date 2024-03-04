@@ -34,7 +34,7 @@ const ThemeProvider: FC<ThemeProviderProps> = ({
     }
 
     root.classList.add(theme)
-  }, [theme])
+  }, [])
 
   const value = {
     theme,

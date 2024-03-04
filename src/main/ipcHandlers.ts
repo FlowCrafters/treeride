@@ -11,9 +11,9 @@ function setIPCHandlers(app: App) {
     const mainWindow = BrowserWindow.getAllWindows()[0]
     mainWindow.setResizable(true)
     if (wide)
-      mainWindow.setSize(1200, 800, true)
+      mainWindow.setSize(1200, 800, false)
     else
-      mainWindow.setSize(800, 500, true)
+      mainWindow.setSize(800, 500, false)
 
     mainWindow.setResizable(false)
     mainWindow.center()

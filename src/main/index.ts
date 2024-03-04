@@ -52,6 +52,7 @@ function createWindow(): BrowserWindow {
 
 let tray: Tray | null = null
 app.whenReady().then(() => {
+  app.dock.hide()
   electronApp.setAppUserModelId('com.treeride.app')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -78,6 +79,10 @@ app.whenReady().then(() => {
   tray.setContextMenu(contextMenu)
 
   setIPCHandlers(app)
+})
+
+app.on('before-quit', () => {
+  tray?.destroy()
 })
 
 app.on('window-all-closed', () => {

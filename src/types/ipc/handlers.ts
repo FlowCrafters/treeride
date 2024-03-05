@@ -5,8 +5,11 @@ interface IPCHandlers {
     value: undefined
     result: GetSettingsResult
   }
-  'wide': {
-    value: boolean
+  'set-window-size': {
+    value: {
+      width: number
+      height: number
+    }
     result: void
   }
 }

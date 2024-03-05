@@ -1,5 +1,6 @@
 import type { App } from 'electron'
 import { BrowserWindow, ipcMain } from 'electron'
+import type { IPCHandlers } from '@rootTypes/ipc'
 import { Settings, settingsMap } from './modules/settings'
 
 function setIPCHandlers(app: App) {
@@ -7,14 +8,12 @@ function setIPCHandlers(app: App) {
     app.exit()
   })
 
-  ipcMain.on('wide', (_, wide: boolean) => {
+  ipcMain.handle('set-window-size', async (_, size: IPCHandlers['set-window-size']['value']) => {
+    const { width, height } = size
+
     const mainWindow = BrowserWindow.getAllWindows()[0]
     mainWindow.setResizable(true)
-    if (wide)
-      mainWindow.setSize(1200, 800, true)
-    else
-      mainWindow.setSize(800, 500, true)
-
+    mainWindow.setSize(width, height, false)
     mainWindow.setResizable(false)
     mainWindow.center()
   })

@@ -3,6 +3,7 @@ import process from 'node:process'
 import { BrowserWindow, Menu, Tray, app, shell } from 'electron'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '@resources/icon.png?asset'
+import iconMac from '@resources/icon-mac.png?asset'
 import { setIPCHandlers } from './ipcHandlers'
 
 function createWindow(): BrowserWindow {
@@ -18,7 +19,7 @@ function createWindow(): BrowserWindow {
     closable: false,
     roundedCorners: true,
     backgroundMaterial: 'acrylic',
-    vibrancy: 'window',
+    vibrancy: 'fullscreen-ui',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -65,7 +66,7 @@ app.whenReady().then(() => {
       createWindow()
   })
 
-  tray = new Tray(icon)
+  tray = new Tray(process.platform === 'darwin' ? iconMac : icon)
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show', type: 'normal', click: () => {
       const window = BrowserWindow.getAllWindows()[0]

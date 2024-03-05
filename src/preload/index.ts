@@ -1,8 +1,20 @@
 import process from 'node:process'
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import type { IPCHandlers } from '@rootTypes/ipc'
+import type { CustomAPI } from './api'
 
-const api = {}
+const doInvoke: CustomAPI['doInvoke'] = (channel, data) => {
+  const validChannels: (keyof IPCHandlers)[] = ['get-settings', 'set-window-size', 'change-setting']
+
+  if (validChannels.includes(channel))
+    return ipcRenderer.invoke(channel, data)
+  return null
+}
+
+const api: CustomAPI = {
+  doInvoke,
+}
 
 if (process.contextIsolated) {
   try {

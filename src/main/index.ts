@@ -1,9 +1,13 @@
 import { join } from 'node:path'
 import process from 'node:process'
-import { BrowserWindow, Menu, Tray, app, ipcMain, shell } from 'electron'
+import { BrowserWindow, Menu, Tray, app, shell } from 'electron'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
-import { checkEnvVar } from '../utils/env'
+import icon from '@resources/icon.png?asset'
+import iconMac from '@resources/icon-mac.png?asset'
+import { setIPCHandlers } from './ipcHandlers'
+import { Settings, settingsMap } from './modules/settings'
+
+const settings = new Settings(settingsMap)
 
 function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
@@ -18,7 +22,7 @@ function createWindow(): BrowserWindow {
     closable: false,
     roundedCorners: true,
     backgroundMaterial: 'acrylic',
-    vibrancy: 'window',
+    vibrancy: 'fullscreen-ui',
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -33,7 +37,7 @@ function createWindow(): BrowserWindow {
   })
 
   mainWindow.on('blur', () => {
-    if (!checkEnvVar(import.meta.env.MAIN_VITE_NO_MAIN_WINDOW_BLUR_HIDE, 'boolean', true))
+    if (settings.settings.settings.system.autoHide)
       mainWindow.hide()
   })
 
@@ -52,6 +56,9 @@ function createWindow(): BrowserWindow {
 
 let tray: Tray | null = null
 app.whenReady().then(() => {
+  if (process.platform === 'darwin')
+    app.dock.hide()
+
   electronApp.setAppUserModelId('com.treeride.app')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -64,7 +71,7 @@ app.whenReady().then(() => {
       createWindow()
   })
 
-  tray = new Tray(icon)
+  tray = new Tray(process.platform === 'darwin' ? iconMac : icon)
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Show', type: 'normal', click: () => {
       const window = BrowserWindow.getAllWindows()[0]
@@ -77,21 +84,11 @@ app.whenReady().then(() => {
   tray.setToolTip('TreeRide')
   tray.setContextMenu(contextMenu)
 
-  ipcMain.on('exit-app', () => {
-    app.exit()
-  })
+  setIPCHandlers(app, settings)
+})
 
-  ipcMain.on('wide', (_, wide: boolean) => {
-    const mainWindow = BrowserWindow.getAllWindows()[0]
-    mainWindow.setResizable(true)
-    if (wide)
-      mainWindow.setSize(1200, 800, false)
-    else
-      mainWindow.setSize(800, 500, false)
-
-    mainWindow.setResizable(false)
-    mainWindow.center()
-  })
+app.on('before-quit', () => {
+  tray?.destroy()
 })
 
 app.on('window-all-closed', () => {

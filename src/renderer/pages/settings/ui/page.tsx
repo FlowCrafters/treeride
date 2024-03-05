@@ -62,7 +62,7 @@ const SettingsPage: FC = () => {
             Theme variant
           </Label>
           <RadioGroup
-            value={settings.appearance.themeVariant as any}
+            value={settings.appearance.themeVariant}
             onValueChange={value => change({
               category: 'appearance',
               key: 'themeVariant',

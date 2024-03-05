@@ -1,7 +1,7 @@
 const windowSizes = {
   default: {
-    width: 800,
-    height: 500,
+    width: 750,
+    height: 475,
   },
   wide: {
     width: 1200,

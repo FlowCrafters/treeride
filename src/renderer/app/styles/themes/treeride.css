@@ -1,7 +1,7 @@
 @tailwind base;
 
 @layer base {
-  :root {
+  .treeride:root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -33,7 +33,7 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  .treeride.dark {
     --background: 0, 0%, 0%, 0.8;
     --foreground: 0 0% 98%;
 

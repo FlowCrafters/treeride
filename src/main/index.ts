@@ -4,6 +4,9 @@ import { BrowserWindow, Menu, Tray, app, shell } from 'electron'
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '@resources/icon.png?asset'
 import { setIPCHandlers } from './ipcHandlers'
+import { Settings, settingsMap } from './modules/settings'
+
+const settings = new Settings(settingsMap)
 
 function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
@@ -33,7 +36,7 @@ function createWindow(): BrowserWindow {
   })
 
   mainWindow.on('blur', () => {
-    if (import.meta.env.MAIN_VITE_NO_MAIN_WINDOW_BLUR_HIDE !== 'true')
+    if (settings.settings.settings.system.autoHide)
       mainWindow.hide()
   })
 
@@ -52,7 +55,9 @@ function createWindow(): BrowserWindow {
 
 let tray: Tray | null = null
 app.whenReady().then(() => {
-  app.dock.hide()
+  if (process.platform === 'darwin')
+    app.dock.hide()
+
   electronApp.setAppUserModelId('com.treeride.app')
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
@@ -78,7 +83,7 @@ app.whenReady().then(() => {
   tray.setToolTip('TreeRide')
   tray.setContextMenu(contextMenu)
 
-  setIPCHandlers(app)
+  setIPCHandlers(app, settings)
 })
 
 app.on('before-quit', () => {

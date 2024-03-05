@@ -1,9 +1,9 @@
 import type { App } from 'electron'
 import { BrowserWindow, ipcMain } from 'electron'
 import type { IPCHandlers } from '@rootTypes/ipc'
-import { Settings, settingsMap } from './modules/settings'
+import type { Settings } from './modules/settings'
 
-function setIPCHandlers(app: App) {
+function setIPCHandlers(app: App, settings: Settings) {
   ipcMain.on('exit-app', () => {
     app.exit()
   })
@@ -15,12 +15,15 @@ function setIPCHandlers(app: App) {
     mainWindow.setResizable(true)
     mainWindow.setSize(width, height, false)
     mainWindow.setResizable(false)
-    mainWindow.center()
+  })
+
+  ipcMain.handle('change-setting', async (_, payload: IPCHandlers['change-setting']['value']) => {
+    settings.changeSetting(payload)
   })
 
   ipcMain.handle('get-settings', async () => {
-    const settings = new Settings(settingsMap)
-    const result = settings.preflightSettings()
+    settings.reload()
+    const result = settings.settings
     return result
   })
 }

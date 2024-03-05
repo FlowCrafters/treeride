@@ -1,9 +1,12 @@
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+import type { ChangeSettingFn } from '@rootTypes/modules/settings'
 
 async function getAppSettings() {
-  await sleep(1000)
   const response = await window.api.doInvoke('get-settings')
   return response
 }
 
-export { getAppSettings }
+const changeSetting: ChangeSettingFn = async (payload) => {
+  await window.api.doInvoke('change-setting', payload)
+}
+
+export { getAppSettings, changeSetting }

@@ -26,10 +26,6 @@ const SettingsDropdown: FC = () => {
     navigate(pathKeys.hello())
   }
 
-  const handleOpenExtension = () => {
-    navigate(pathKeys.extensionsSettings())
-  }
-
   const handleExit = () => {
     window.electron.ipcRenderer.send('exit-app')
   }
@@ -65,11 +61,6 @@ const SettingsDropdown: FC = () => {
           onClick={handleGoLab}
         >
           Lab
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={handleOpenExtension}
-        >
-          Extensions
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

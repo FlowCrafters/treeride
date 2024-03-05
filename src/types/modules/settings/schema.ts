@@ -11,6 +11,7 @@ interface HotkeysSchema {
 
 interface SystemSchema {
   autoStart: boolean
+  autoHide: boolean
 }
 
 interface SettingsSchema {
@@ -35,4 +36,12 @@ interface GetSettingsResult {
   error: string | null
 }
 
-export type { SettingsSchema, SettingsMap, GetSettingsResult }
+interface ChangeSettingPayload {
+  category: keyof SettingsSchema
+  key: string
+  value: unknown
+}
+
+type ChangeSettingFn = (payload: ChangeSettingPayload) => Promise<void>
+
+export type { SettingsSchema, SettingsMap, GetSettingsResult, ChangeSettingFn, ChangeSettingPayload }

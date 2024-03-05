@@ -2,6 +2,12 @@ html, body, #root {
   @apply h-full;
 }
 
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 *, *::after, *::before {
   box-sizing: border-box;
 }

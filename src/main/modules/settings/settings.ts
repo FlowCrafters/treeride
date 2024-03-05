@@ -2,15 +2,18 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { EventEmitter } from 'node:events'
 import { app } from 'electron'
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml'
-import type { GetSettingsResult, SettingsMap, SettingsSchema } from '@rootTypes/modules/settings'
+import type { ChangeSettingPayload, GetSettingsResult, SettingsMap, SettingsSchema } from '@rootTypes/modules/settings'
+import { getDefaultValuesFromMap } from './map'
 
 class Settings {
   #settingsMap: SettingsMap
   #emitter: EventEmitter
+  settings: GetSettingsResult
 
   constructor(settingsMap: SettingsMap) {
     this.#settingsMap = settingsMap
     this.#emitter = new EventEmitter()
+    this.settings = this.#preflightSettings()
   }
 
   #getSettingsPath(): string {
@@ -30,6 +33,9 @@ class Settings {
   }
 
   #writeSettings(settings: SettingsSchema) {
+    if (this.settings.error)
+      return
+
     const settingsPath = this.#getSettingsPath()
     const content = stringifyYaml(settings)
     writeFileSync(settingsPath, content)
@@ -68,15 +74,21 @@ class Settings {
     return newSettings
   }
 
-  changeSetting<T extends keyof SettingsSchema>(category: T, key: keyof SettingsSchema[T], value: SettingsSchema[T][keyof SettingsSchema[T]]) {
+  changeSetting(payload: ChangeSettingPayload) {
     const settings = this.#readSettings()
-    settings[category][key] = value
+    settings[payload.category][payload.key] = payload.value
     this.#validateSchema(settings)
     this.#writeSettings(settings)
+
+    this.settings.settings = settings
     this.#emitter.emit('update', settings)
   }
 
-  preflightSettings(): GetSettingsResult {
+  reload() {
+    this.settings = this.#preflightSettings()
+  }
+
+  #preflightSettings(): GetSettingsResult {
     const path = this.#getSettingsPath()
     if (!existsSync(path))
       writeFileSync(path, '')
@@ -95,7 +107,7 @@ class Settings {
     catch (error) {
       return {
         error: (error as Error).message,
-        settings: {} as SettingsSchema,
+        settings: getDefaultValuesFromMap(this.#settingsMap) as SettingsSchema,
         settingsFilePath: path,
       }
     }

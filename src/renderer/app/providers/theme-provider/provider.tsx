@@ -1,29 +1,27 @@
 import type { FC, PropsWithChildren } from 'react'
-import { useEffect, useState } from 'react'
-import type { Theme } from './types'
+import { useEffect, useMemo } from 'react'
+import { useSettings } from '../settings-provider'
+import type { ThemeProviderState } from './context'
 import { ThemeProviderContext } from './context'
 
-interface ThemeProviderProps extends PropsWithChildren {
-  defaultTheme?: Theme
-  storageKey?: string
-}
+type ThemeProviderProps = PropsWithChildren
 
 const ThemeProvider: FC<ThemeProviderProps> = ({
   children,
-  defaultTheme = 'system',
-  storageKey = 'theme',
-  ...props
 }) => {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
-  )
+  const { settings } = useSettings()
+
+  const themeSettings = settings?.appearance ?? {
+    theme: 'zinc',
+    themeVariant: 'system',
+  }
 
   useEffect(() => {
     const root = window.document.documentElement
 
     root.classList.remove('light', 'dark')
 
-    if (theme === 'system') {
+    if (themeSettings.themeVariant === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
         .matches
         ? 'dark'
@@ -33,20 +31,22 @@ const ThemeProvider: FC<ThemeProviderProps> = ({
       return
     }
 
-    root.classList.add(theme)
-  }, [theme])
+    root.classList.add(themeSettings.themeVariant)
+  }, [themeSettings.themeVariant])
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
-    },
-  }
+  useEffect(() => {
+    const root = window.document.documentElement
+    root.classList.remove('zinc', 'treeride')
+    root.classList.add(themeSettings.theme)
+  }, [themeSettings.theme])
+
+  const value = useMemo<ThemeProviderState>(() => ({
+    theme: themeSettings.theme,
+    themeVariant: themeSettings.themeVariant,
+  }), [themeSettings.theme, themeSettings.themeVariant])
 
   return (
     <ThemeProviderContext.Provider
-      {...props}
       value={value}
     >
       {children}

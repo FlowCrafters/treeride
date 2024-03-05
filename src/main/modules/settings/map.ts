@@ -22,7 +22,22 @@ const settingsMap: SettingsMap = {
       defaultValue: false,
       validator: (value: boolean) => typeof value === 'boolean',
     },
+    autoHide: {
+      defaultValue: false,
+      validator: (value: boolean) => typeof value === 'boolean',
+    },
   },
 }
 
-export { settingsMap }
+function getDefaultValuesFromMap(map: SettingsMap) {
+  const result: Record<string, any> = {}
+  for (const category in map) {
+    result[category] = {}
+    for (const subKey in map[category])
+      result[category][subKey] = map[category][subKey].defaultValue
+  }
+
+  return result
+}
+
+export { settingsMap, getDefaultValuesFromMap }

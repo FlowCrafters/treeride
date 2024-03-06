@@ -1,19 +1,17 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { EventEmitter } from 'node:events'
+import objectPath from 'object-path'
 import { app } from 'electron'
-import { parse as parseYaml, stringify as stringifyYaml } from 'yaml'
-import type { ChangeSettingPayload, GetSettingsResult, SettingsMap, SettingsSchema } from '@rootTypes/modules/settings'
-import { getDefaultValuesFromMap } from './map'
+import { type SettingsResult, type SettingsSchema, settingsSchema } from '@rootTypes/modules/settings'
+import { parseYaml, stringifyYaml } from 'src/main/utils/yaml'
 
 class Settings {
-  #settingsMap: SettingsMap
   #emitter: EventEmitter
-  settings: GetSettingsResult
+  result: SettingsResult
 
-  constructor(settingsMap: SettingsMap) {
-    this.#settingsMap = settingsMap
+  constructor() {
     this.#emitter = new EventEmitter()
-    this.settings = this.#preflightSettings()
+    this.result = this.#preflightSettings()
   }
 
   #getSettingsPath(): string {
@@ -28,87 +26,53 @@ class Settings {
   #readSettings(): SettingsSchema {
     const settingsPath = this.#getSettingsPath()
     const content = readFileSync(settingsPath, 'utf-8')
-    const parsed = this.#parseSettings(content)
+    const parsed = this.#parseSettings(content) ?? {}
     return parsed
   }
 
   #writeSettings(settings: SettingsSchema) {
-    if (this.settings.error)
-      return
-
     const settingsPath = this.#getSettingsPath()
     const content = stringifyYaml(settings)
     writeFileSync(settingsPath, content)
   }
 
-  #validateCategories(settings: SettingsSchema) {
-    for (const category in this.#settingsMap) {
-      if (!settings[category])
-        settings[category] = {}
-    }
-  }
-
-  #validateSettings(settings: SettingsSchema) {
-    for (const category in this.#settingsMap) {
-      for (const subKey in this.#settingsMap[category]) {
-        const { defaultValue, validator, onFail } = this.#settingsMap[category][subKey]
-        const value = settings[category][subKey]
-        if (!value) {
-          settings[category][subKey] = defaultValue
-          continue
-        }
-        if (!validator(value)) {
-          if (onFail)
-            settings[category][subKey] = onFail(value)
-          else
-            throw new Error(`Invalid value for ${category}.${subKey}: ${value}`)
-        }
-      }
-    }
-  }
-
-  #validateSchema(settings: SettingsSchema) {
-    const newSettings = { ...settings }
-    this.#validateCategories(newSettings)
-    this.#validateSettings(newSettings)
-    return newSettings
-  }
-
-  changeSetting(payload: ChangeSettingPayload) {
-    const settings = this.#readSettings()
-    settings[payload.category][payload.key] = payload.value
-    this.#validateSchema(settings)
+  changeSetting(path: string, value: unknown) {
+    let settings = this.#readSettings()
+    objectPath.set(settings, path, value)
+    settings = settingsSchema.parse(settings)
     this.#writeSettings(settings)
 
-    this.settings.settings = settings
+    this.result.data = settings
+    this.result.error = null
     this.#emitter.emit('update', settings)
   }
 
   reload() {
-    this.settings = this.#preflightSettings()
+    this.result = this.#preflightSettings()
   }
 
-  #preflightSettings(): GetSettingsResult {
+  #preflightSettings(): SettingsResult {
     const path = this.#getSettingsPath()
     if (!existsSync(path))
       writeFileSync(path, '')
 
     try {
-      let settings = this.#readSettings()
-      settings = this.#validateSchema(settings)
+      let settings: SettingsSchema = this.#readSettings()
+      settings = settingsSchema.parse(settings)
+
       this.#writeSettings(settings)
 
       return {
         error: null,
-        settings,
-        settingsFilePath: path,
+        data: settings,
+        filePath: path,
       }
     }
     catch (error) {
       return {
         error: (error as Error).message,
-        settings: getDefaultValuesFromMap(this.#settingsMap) as SettingsSchema,
-        settingsFilePath: path,
+        data: settingsSchema.parse({}),
+        filePath: path,
       }
     }
   }

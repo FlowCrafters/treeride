@@ -5,11 +5,12 @@ import { Label } from '@shared/kit/ui/label'
 import { ConfigureBlock } from '@shared/ui'
 import { useSettings } from '@app/providers/settings-provider'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/kit/ui/select'
-import { settingsThemeElements, settingsThemeVariantElements } from '@entities/settings'
-import { RadioGroup, RadioGroupItem } from '@shared/kit/ui/radio-group'
+import { useTheme } from '@app/providers/theme-provider/context'
 
 const SettingsPage: FC = () => {
   const { settings, change } = useSettings()
+
+  const { themes, appearances } = useTheme()
 
   return (
     <div
@@ -23,14 +24,13 @@ const SettingsPage: FC = () => {
           title="Theme"
         >
           <Label>
-            Theme
+            Light theme
           </Label>
           <Select
-            value={settings.appearance.theme}
+            value={settings.appearance.lightTheme}
             onValueChange={(value) => {
               change({
-                category: 'appearance',
-                key: 'theme',
+                path: 'appearance.lightTheme',
                 value,
               })
             }}
@@ -43,49 +43,86 @@ const SettingsPage: FC = () => {
               />
             </SelectTrigger>
             <SelectContent>
-              {Object.entries(settingsThemeElements).map(([key, value]) => (
+              {themes.filter(theme => theme.appearance === 'light').map(theme => (
                 <SelectItem
-                  key={key}
-                  value={key}
+                  key={theme.name}
+                  value={theme.name}
                 >
-                  {value}
+                  {theme.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </ConfigureBlock>
         <ConfigureBlock
-          description="Choose your color scheme"
-          title="Scheme"
+          description="Choose your theme"
+          title="Theme"
         >
           <Label>
-            Theme variant
+            Dark theme
           </Label>
-          <RadioGroup
-            value={settings.appearance.themeVariant}
-            onValueChange={value => change({
-              category: 'appearance',
-              key: 'themeVariant',
-              value,
-            })}
+          <Select
+            value={settings.appearance.darkTheme}
+            onValueChange={(value) => {
+              change({
+                path: 'appearance.darkTheme',
+                value,
+              })
+            }}
           >
-            {Object.entries(settingsThemeVariantElements).map(([key, value]) => (
-              <div
-                className="flex items-center space-x-2"
-                key={key}
-              >
-                <RadioGroupItem
-                  id={key}
-                  value={key}
-                />
-                <Label
-                  htmlFor={key}
+            <SelectTrigger
+              className="w-[180px]"
+            >
+              <SelectValue
+                placeholder="Theme"
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {themes.filter(theme => theme.appearance === 'dark').map(theme => (
+                <SelectItem
+                  key={theme.name}
+                  value={theme.name}
+                >
+                  {theme.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </ConfigureBlock>
+        <ConfigureBlock
+          description="Choose your theme"
+          title="Theme"
+        >
+          <Label>
+            Appearance
+          </Label>
+          <Select
+            value={settings.appearance.appearance}
+            onValueChange={(value) => {
+              change({
+                path: 'appearance.appearance',
+                value,
+              })
+            }}
+          >
+            <SelectTrigger
+              className="w-[180px]"
+            >
+              <SelectValue
+                placeholder="Theme"
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.entries(appearances).map(([name, value]) => (
+                <SelectItem
+                  key={name}
+                  value={name}
                 >
                   {value}
-                </Label>
-              </div>
-            ))}
-          </RadioGroup>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </ConfigureBlock>
         <ConfigureBlock
           description="Start app on system startup"
@@ -98,8 +135,7 @@ const SettingsPage: FC = () => {
               checked={settings.system.autoStart}
               id="airplane-mode"
               onCheckedChange={checked => change({
-                category: 'system',
-                key: 'autoStart',
+                path: 'system.autoStart',
                 value: checked,
               })}
             />
@@ -123,8 +159,7 @@ const SettingsPage: FC = () => {
               checked={settings.system.autoHide}
               id="airplane-mode"
               onCheckedChange={checked => change({
-                category: 'system',
-                key: 'autoHide',
+                path: 'system.autoHide',
                 value: checked,
               })}
             />

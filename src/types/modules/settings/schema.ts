@@ -1,47 +1,31 @@
-import type { Theme, ThemeVariant } from '../themes/themes'
+import { z } from 'zod'
 
-interface AppearanceSchema {
-  theme: Theme
-  themeVariant: ThemeVariant
-}
+const settingsSchema = z.object({
+  appearance: z.object({
+    lightTheme: z.string().default('TreeRide Light'),
+    darkTheme: z.string().default('TreeRide Dark'),
+    appearance: z.enum(['light', 'dark', 'system']).default('system'),
+  }).default({}),
+  hotkeys: z.object({
+    global: z.string().default(''),
+  }).default({}),
+  system: z.object({
+    autoStart: z.boolean().default(false),
+    autoHide: z.boolean().default(true),
+  }).default({}),
+}).default({})
 
-interface HotkeysSchema {
-  global: string
-}
+type SettingsSchema = typeof settingsSchema['_output']
 
-interface SystemSchema {
-  autoStart: boolean
-  autoHide: boolean
-}
-
-interface SettingsSchema {
-  appearance: AppearanceSchema
-  hotkeys: HotkeysSchema
-  system: SystemSchema
-}
-
-type SettingsMap = {
-  [key in keyof SettingsSchema]: {
-    [subKey in keyof SettingsSchema[key]]: {
-      defaultValue: SettingsSchema[key][subKey]
-      validator: (value: SettingsSchema[key][subKey]) => boolean
-      onFail?: (value: SettingsSchema[key][subKey]) => SettingsSchema[key][subKey]
-    }
-  }
-}
-
-interface GetSettingsResult {
-  settings: SettingsSchema
-  settingsFilePath: string
+interface SettingsResult {
+  data: SettingsSchema
+  filePath: string
   error: string | null
 }
 
 interface ChangeSettingPayload {
-  category: keyof SettingsSchema
-  key: string
+  path: string
   value: unknown
 }
 
-type ChangeSettingFn = (payload: ChangeSettingPayload) => Promise<void>
-
-export type { SettingsSchema, SettingsMap, GetSettingsResult, ChangeSettingFn, ChangeSettingPayload }
+export { settingsSchema, type SettingsSchema, type SettingsResult, type ChangeSettingPayload }

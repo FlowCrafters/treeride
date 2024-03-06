@@ -1,7 +1,7 @@
 @tailwind base;
 
 @layer base {
-  .treeride:root {
+  :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -33,11 +33,11 @@
     --radius: 0.5rem;
   }
 
-  .treeride.dark {
-    --background: 0, 0%, 0%, 0.8;
+  .dark {
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 0, 0%, 0%, 0.2;
+    --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
 
     --popover: 240 10% 3.9%;
@@ -52,13 +52,13 @@
     --muted: 240 3.7% 15.9%;
     --muted-foreground: 240 5% 64.9%;
 
-    --accent: 11, 73%, 57%;
+    --accent: 240 3.7% 15.9%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240, 3.7%, 15.9%, 0.3;
+    --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }

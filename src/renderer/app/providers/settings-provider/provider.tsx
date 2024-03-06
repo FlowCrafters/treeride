@@ -3,7 +3,6 @@ import type { SettingsSchema } from '@rootTypes/modules/settings'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { type FC, type PropsWithChildren, useCallback, useMemo } from 'react'
 import { Loader } from '@shared/ui'
-import { ThemeProvider } from '../theme-provider'
 import type { SettingsContextValue } from './context'
 import { SettingsContext } from './context'
 
@@ -31,10 +30,10 @@ const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       return {}
 
     const meta: Record<string, string> = {
-      settingsFilePath: data?.settingsFilePath ?? '',
+      settingsFilePath: data?.filePath ?? '',
     }
     return meta
-  }, [data?.settingsFilePath, settingsError])
+  }, [data?.filePath, settingsError])
 
   const reload = useCallback(() => {
     refetch()
@@ -42,7 +41,7 @@ const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
 
   const value = useMemo<SettingsContextValue>(() => {
     return {
-      settings: data?.settings ?? {} as SettingsSchema,
+      settings: data?.data ?? {} as SettingsSchema,
       settingsError,
       settingsErrorMeta,
       isLoading,
@@ -53,19 +52,17 @@ const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
 
   if (!data || isLoading || settingsError) {
     return (
-      <ThemeProvider>
-        <Loader
-          error={settingsError
-            ? {
-                message: settingsError,
-                meta: settingsErrorMeta,
-              }
-            : null}
-          isLoading={isLoading}
-          moduleName="Settings"
-          onRetry={refetch}
-        />
-      </ThemeProvider>
+      <Loader
+        error={settingsError
+          ? {
+              message: settingsError,
+              meta: settingsErrorMeta,
+            }
+          : null}
+        isLoading={isLoading}
+        moduleName="Settings"
+        onRetry={refetch}
+      />
     )
   }
 

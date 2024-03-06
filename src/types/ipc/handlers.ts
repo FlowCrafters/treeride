@@ -1,9 +1,14 @@
-import type { ChangeSettingPayload, GetSettingsResult } from '@rootTypes/modules/settings'
+import type { ChangeSettingPayload, SettingsResult } from '@rootTypes/modules/settings'
+import type { ThemeSchema } from '@rootTypes/modules/themes'
 
 interface IPCHandlers {
   'get-settings': {
     value: undefined
-    result: GetSettingsResult
+    result: SettingsResult
+  }
+  'get-themes': {
+    value: undefined
+    result: ThemeSchema[]
   }
   'change-setting': {
     value: ChangeSettingPayload

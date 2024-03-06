@@ -1,4 +1,4 @@
-import type { ChangeSettingFn, SettingsSchema } from '@rootTypes/modules/settings'
+import type { ChangeSettingPayload, SettingsSchema } from '@rootTypes/modules/settings'
 import { createContext, useContext } from 'react'
 
 interface SettingsContextValue {
@@ -7,7 +7,7 @@ interface SettingsContextValue {
   settingsErrorMeta: Record<string, string> | null
   isLoading: boolean
   reload: () => void
-  change: ChangeSettingFn
+  change: (payload: ChangeSettingPayload) => Promise<void>
 }
 
 const SettingsContext = createContext<SettingsContextValue>({} as SettingsContextValue)

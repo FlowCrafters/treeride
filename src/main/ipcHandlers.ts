@@ -2,8 +2,9 @@ import type { App } from 'electron'
 import { BrowserWindow, ipcMain } from 'electron'
 import type { IPCHandlers } from '@rootTypes/ipc'
 import type { Settings } from './modules/settings'
+import type { Themes } from './modules/themes/themes'
 
-function setIPCHandlers(app: App, settings: Settings) {
+function setIPCHandlers(app: App, settings: Settings, themes: Themes) {
   ipcMain.on('exit-app', () => {
     app.exit()
   })
@@ -18,13 +19,17 @@ function setIPCHandlers(app: App, settings: Settings) {
   })
 
   ipcMain.handle('change-setting', async (_, payload: IPCHandlers['change-setting']['value']) => {
-    settings.changeSetting(payload)
+    settings.changeSetting(payload.path, payload.value)
   })
 
   ipcMain.handle('get-settings', async () => {
     settings.reload()
-    const result = settings.settings
+    const { result } = settings
     return result
+  })
+
+  ipcMain.handle('get-themes', async () => {
+    return themes.themes
   })
 }
 

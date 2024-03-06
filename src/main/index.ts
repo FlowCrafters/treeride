@@ -5,9 +5,11 @@ import { electronApp, is, optimizer } from '@electron-toolkit/utils'
 import icon from '@resources/icon.png?asset'
 import iconMac from '@resources/icon-mac.png?asset'
 import { setIPCHandlers } from './ipcHandlers'
-import { Settings, settingsMap } from './modules/settings'
+import { Settings } from './modules/settings'
+import { Themes } from './modules/themes/themes'
 
-const settings = new Settings(settingsMap)
+const settings = new Settings()
+const themes = new Themes()
 
 function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
@@ -37,7 +39,7 @@ function createWindow(): BrowserWindow {
   })
 
   mainWindow.on('blur', () => {
-    if (settings.settings.settings.system.autoHide)
+    if (settings.result.data.system.autoHide)
       mainWindow.hide()
   })
 
@@ -84,7 +86,7 @@ app.whenReady().then(() => {
   tray.setToolTip('TreeRide')
   tray.setContextMenu(contextMenu)
 
-  setIPCHandlers(app, settings)
+  setIPCHandlers(app, settings, themes)
 })
 
 app.on('before-quit', () => {

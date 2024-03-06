@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background-color: rgba(128, 128, 128, 0.2);
+    @apply bg-main text-foreground;
+  }
+}
+
+html, body, #root {
+  @apply h-full;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  user-select: none;
+}
 
 @layer components {
   .win-drag {
@@ -10,14 +37,5 @@
 
   .win-no-drag {
     -webkit-app-region: no-drag;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

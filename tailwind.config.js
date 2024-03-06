@@ -14,12 +14,15 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        main: `linear-gradient(to bottom, var(--treeride-theme--background) 0%, var(--treeride-theme--background-secondary) 70%)`,
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        foreground: 'var(--treeride-theme--text)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',

@@ -41,7 +41,7 @@ class Extensions {
   }
 
   #runBackFront() {
-    const backFront = fork(resolve(app.getPath('userData'), 'backFront.js'))
+    const backFront = fork(resolve(app.getPath('userData'), 'backfront.js'))
 
     backFront.on('message', (message: MessageFromBackFront) => {
       if (message.type === 'log')

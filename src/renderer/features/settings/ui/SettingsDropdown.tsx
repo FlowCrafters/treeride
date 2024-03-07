@@ -40,7 +40,7 @@ const SettingsDropdown: FC = () => {
       >
         <Button
           size="icon"
-          variant="outline"
+          variant="default"
         >
           <SettingsIcon />
         </Button>

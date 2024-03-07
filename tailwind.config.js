@@ -18,10 +18,28 @@ module.exports = {
         main: `linear-gradient(to bottom, var(--treeride-theme--background) 0%, var(--treeride-theme--background-secondary) 70%)`,
       },
       colors: {
+        selection: {
+          DEFAULT: 'var(--treeride-theme--selection)',
+          100: 'var(--treeride-theme--selection-100)',
+        },
+        text: {
+          DEFAULT: 'var(--treeride-theme--text)',
+          100: 'var(--treeride-theme--text-100)',
+          400: 'var(--treeride-theme--text-400)',
+          600: 'var(--treeride-theme--text-600)',
+        },
+        loader: {
+          DEFAULT: 'var(--treeride-theme--loader)',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
+        background: {
+          'DEFAULT': 'hsl(var(--background))',
+          'primary': 'var(--treeride-theme--background)',
+          'primary-blurred': 'var(--treeride-theme--background-blurred)',
+          'secondary': 'var(--treeride-theme--background-secondary)',
+        },
         foreground: 'var(--treeride-theme--text)',
         primary: {
           DEFAULT: 'hsl(var(--primary))',

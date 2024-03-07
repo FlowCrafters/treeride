@@ -34,5 +34,8 @@
     "jsonc",
     "yaml",
     "toml"
+  ],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"']([^\"']*).*?[\"'`]"]
   ]
 }

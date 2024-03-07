@@ -2,7 +2,9 @@ import type { FC } from 'react'
 
 const LabPage: FC = () => {
   return (
-    <div>Lab page</div>
+    <div>
+      Lab page
+    </div>
   )
 }
 

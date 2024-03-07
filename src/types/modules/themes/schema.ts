@@ -9,6 +9,8 @@ const themeSchema = z.object({
     background: z.string(),
     backgroundSecondary: z.string(),
     text: z.string(),
+    selection: z.string(),
+    loader: z.string(),
   }),
 })
 

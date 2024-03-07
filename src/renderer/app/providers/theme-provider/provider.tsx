@@ -34,8 +34,15 @@ const ThemeProvider: FC<ThemeProviderProps> = ({
     return `
       :root {
         --treeride-theme--background: ${hexToRgba(theme.colors.background, 0.4)};
+        --treeride-theme--background-blurred: ${hexToRgba(theme.colors.background, 0.8)};
         --treeride-theme--background-secondary: ${hexToRgba(theme.colors.backgroundSecondary, 0.4)};
-        --treeride-theme--text: ${theme.colors.text}
+        --treeride-theme--text: ${theme.colors.text};
+        --treeride-theme--text-100: ${hexToRgba(theme.colors.text, 0.1)};
+        --treeride-theme--text-400: ${hexToRgba(theme.colors.text, 0.4)};
+        --treeride-theme--text-600: ${hexToRgba(theme.colors.text, 0.6)};
+        --treeride-theme--selection: ${theme.colors.selection};
+        --treeride-theme--selection-100: ${hexToRgba(theme.colors.selection, 0.1)};
+        --treeride-theme--loader: ${theme.colors.loader};
       }
     `
   }

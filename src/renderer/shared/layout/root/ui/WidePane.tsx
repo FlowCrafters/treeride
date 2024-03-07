@@ -31,7 +31,7 @@ const WidePane: FC<WidePaneProps> = ({ title, children }) => {
       >
         <Button
           size="icon"
-          variant="outline"
+          variant="default"
           onClick={handleGoBack}
         >
           <ArrowLeftIcon />

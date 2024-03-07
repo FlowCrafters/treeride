@@ -7,7 +7,7 @@ interface FooterProps {
 const Footer: FC<FooterProps> = ({ settings }) => {
   return (
     <div
-      className="border-t border-solid p-2 win-drag flex items-start"
+      className="border-t border-solid border-text-100 p-2 win-drag flex items-start"
     >
       <div
         className="win-no-drag"

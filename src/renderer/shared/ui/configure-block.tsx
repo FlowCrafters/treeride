@@ -8,7 +8,7 @@ interface ConfigureBlockProps extends PropsWithChildren {
 const ConfigureBlock: FC<ConfigureBlockProps> = ({ children }) => {
   return (
     <div
-      className="p-4 border rounded-md flex flex-col gap-4"
+      className="p-4 border border-text-100 rounded-md flex flex-col gap-4"
     >
       {children}
     </div>

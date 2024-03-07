@@ -4,12 +4,15 @@ import objectPath from 'object-path'
 import { app } from 'electron'
 import { type SettingsResult, type SettingsSchema, settingsSchema } from '@rootTypes/modules/settings'
 import { parseYaml, stringifyYaml } from 'src/main/utils/yaml'
+import type { Logger } from '../logger/logger'
 
 class Settings {
   #emitter: EventEmitter
+  #logger: Logger
   result: SettingsResult
 
-  constructor() {
+  constructor(logger: Logger) {
+    this.#logger = logger
     this.#emitter = new EventEmitter()
     this.result = this.#preflightSettings()
   }
@@ -34,6 +37,7 @@ class Settings {
     const settingsPath = this.#getSettingsPath()
     const content = stringifyYaml(settings)
     writeFileSync(settingsPath, content)
+    this.#logger.logger.debug('write settings')
   }
 
   changeSetting(path: string, value: unknown) {
@@ -45,6 +49,7 @@ class Settings {
     this.result.data = settings
     this.result.error = null
     this.#emitter.emit('update', settings)
+    this.#logger.logger.debug('change setting')
   }
 
   reload() {

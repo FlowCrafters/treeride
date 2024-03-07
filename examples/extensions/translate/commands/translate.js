@@ -1,0 +1,2 @@
+
+api.log('Translate starting')

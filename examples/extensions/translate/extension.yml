@@ -1,0 +1,10 @@
+---
+name: translate
+version: '1.0'
+title: Translate
+description: Translate all
+commands:
+  - name: translate
+    title: Translate
+    description: Translate all
+    mode: view

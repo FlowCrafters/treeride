@@ -34,5 +34,8 @@
     "jsonc",
     "yaml",
     "toml"
+  ],
+  "cSpell.words": [
+    "backfront"
   ]
 }

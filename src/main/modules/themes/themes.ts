@@ -2,11 +2,14 @@ import { existsSync, mkdirSync, readFileSync, readdirSync } from 'node:fs'
 import { app } from 'electron'
 import { parseYaml } from 'src/main/utils/yaml'
 import { type ThemeSchema, themeSchema } from '@rootTypes/modules/themes'
+import type { Logger } from '../logger/logger'
 
 class Themes {
+  #logger: Logger
   themes: ThemeSchema[]
 
-  constructor() {
+  constructor(logger: Logger) {
+    this.#logger = logger
     this.themes = this.#preflightThemes()
   }
 
@@ -25,6 +28,7 @@ class Themes {
     if (!existsSync(path))
       mkdirSync(path)
 
+    this.#logger.logger.debug('preflight themes')
     const themes = readdirSync(path).map(filePath => readFileSync(`${path}/${filePath}`, 'utf-8')).map(this.#readTheme)
     return themes
   }

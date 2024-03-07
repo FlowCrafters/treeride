@@ -3,8 +3,9 @@ import { BrowserWindow, ipcMain } from 'electron'
 import type { IPCHandlers } from '@rootTypes/ipc'
 import type { Settings } from './modules/settings'
 import type { Themes } from './modules/themes/themes'
+import type { Extensions } from './modules/extensions'
 
-function setIPCHandlers(app: App, settings: Settings, themes: Themes) {
+function setIPCHandlers(app: App, settings: Settings, themes: Themes, extensions: Extensions) {
   ipcMain.on('exit-app', () => {
     app.exit()
   })
@@ -26,6 +27,18 @@ function setIPCHandlers(app: App, settings: Settings, themes: Themes) {
     settings.reload()
     const { result } = settings
     return result
+  })
+
+  ipcMain.handle('get-extensions', async () => {
+    return extensions.extensions
+  })
+
+  ipcMain.handle('run-extension-command', async (_, payload: IPCHandlers['run-extension-command']['value']) => {
+    extensions.runExtensionCommand(payload)
+  })
+
+  ipcMain.handle('kill-extension-command', async (_) => {
+    extensions.killExtensionCommand()
   })
 
   ipcMain.handle('get-themes', async () => {

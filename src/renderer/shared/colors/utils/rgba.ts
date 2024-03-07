@@ -6,4 +6,5 @@ function hexToRgba(hex: string, alpha: number) {
   return `rgba(${rColor}, ${gColor}, ${bColor}, ${alpha})`
 }
 
+
 export { hexToRgba }

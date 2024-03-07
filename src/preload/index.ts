@@ -5,7 +5,15 @@ import type { IPCHandlers } from '@rootTypes/ipc'
 import type { CustomAPI } from './api'
 
 const doInvoke: CustomAPI['doInvoke'] = (channel, data) => {
-  const validChannels: (keyof IPCHandlers)[] = ['get-settings', 'set-window-size', 'change-setting', 'get-themes']
+  const validChannels: (keyof IPCHandlers)[] = [
+    'get-settings',
+    'set-window-size',
+    'change-setting',
+    'get-themes',
+    'get-extensions',
+    'run-extension-command',
+    'kill-extension-command',
+  ]
 
   if (validChannels.includes(channel))
     return ipcRenderer.invoke(channel, data)

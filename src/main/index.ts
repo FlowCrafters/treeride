@@ -7,9 +7,14 @@ import iconMac from '@resources/icon-mac.png?asset'
 import { setIPCHandlers } from './ipcHandlers'
 import { Settings } from './modules/settings'
 import { Themes } from './modules/themes/themes'
+import { Extensions } from './modules/extensions'
+import { Logger } from './modules/logger/logger'
 
-const settings = new Settings()
-const themes = new Themes()
+const logger = new Logger()
+
+const settings = new Settings(logger)
+const themes = new Themes(logger)
+const extensions = new Extensions(logger)
 
 function createWindow(): BrowserWindow {
   const mainWindow = new BrowserWindow({
@@ -86,7 +91,7 @@ app.whenReady().then(() => {
   tray.setToolTip('TreeRide')
   tray.setContextMenu(contextMenu)
 
-  setIPCHandlers(app, settings, themes)
+  setIPCHandlers(app, settings, themes, extensions)
 })
 
 app.on('before-quit', () => {

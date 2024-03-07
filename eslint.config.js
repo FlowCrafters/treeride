@@ -23,6 +23,7 @@ const baseConfig = {
     'dist',
     'out',
     'src/renderer/shared/kit/ui',
+    'backfront',
   ],
 }
 
